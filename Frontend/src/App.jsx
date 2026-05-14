@@ -129,8 +129,8 @@ useEffect(() => {
     if (!ticker) return;
     setLoading(true);
 
-    const dataUrl = `http://127.0.0.1:8000/data/${ticker}/${range}`;
-    const predictUrl = `http://127.0.0.1:8000/predict/${ticker}`;
+    const dataUrl = `https://stock-price-prediction-46mf.onrender.com/data/${ticker}/${range}`;
+    const predictUrl = `https://stock-price-prediction-46mf.onrender.coms/predict/${ticker}`;
 
     Promise.all([axios.get(dataUrl), axios.get(predictUrl)])
         .then(([historyRes, predictRes]) => {
