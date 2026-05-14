@@ -380,7 +380,7 @@ def predict_stock(ticker: str):
         scaler = MinMaxScaler()
         scaled_data = scaler.fit_transform(data_filtered)
         lookback = 60
-        model_path = f"model_{ticker}.h5"
+        model_path = f"/tmp/model_{ticker}.h5"
 
         if os.path.exists(model_path):
             model = load_model(model_path)
