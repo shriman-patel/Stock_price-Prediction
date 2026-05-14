@@ -128,10 +128,8 @@ useEffect(() => {
   const fetchPrediction = useCallback(() => {
     if (!ticker) return;
     setLoading(true);
-
-    const dataUrl = `https://stock-price-prediction-46mf.onrender.com/data/${ticker}/${range}`;
-    const predictUrl = `https://stock-price-prediction-46mf.onrender.coms/predict/${ticker}`;
-
+const dataUrl = `https://stock-price-prediction-46mf.onrender.com/data/${ticker}/${range}`;
+const predictUrl = `https://stock-price-prediction-46mf.onrender.com/predict/${ticker}`;
     Promise.all([axios.get(dataUrl), axios.get(predictUrl)])
         .then(([historyRes, predictRes]) => {
             const historicalData = historyRes.data;
