@@ -22,7 +22,7 @@ const Ticker = ({
     console.log("USER ID:", userId);
 
     try {
-      await axios.post("http://127.0.0.1:8000/portfolio/add", {
+      await axios.post("https://stock-price-prediction-46mf.onrender.com/portfolio/add", {
         ticker,
         quantity: 1,
         buy_price: latestPrice,
@@ -37,7 +37,7 @@ const Ticker = ({
 
   const handleSell = async () => {
     try {
-      await axios.post("http://127.0.0.1:8000/portfolio/sell", {
+      await axios.post("https://stock-price-prediction-46mf.onrender.com/portfolio/sell", {
         ticker,
         quantity: 1,
         user_id: userId

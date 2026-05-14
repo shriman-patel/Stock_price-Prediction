@@ -11,7 +11,7 @@ const Portfolio = () => {
 
   if (!userId) return;
 
-  axios.get(`http://127.0.0.1:8000/portfolio/${userId}`)
+  axios.get(`https://stock-price-prediction-46mf.onrender.com/portfolio/${userId}`)
     .then(res => {
       console.log(res.data);
       setPortfolio(res.data);

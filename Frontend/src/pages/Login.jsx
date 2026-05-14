@@ -9,7 +9,7 @@ const Login = ({ setIsAuthenticated }) => {
 
   const handleLogin = async () => {
     try {
-      const res = await axios.post("http://127.0.0.1:8000/login", {
+      const res = await axios.post("https://stock-price-prediction-46mf.onrender.com/login", {
         email,
         password,
       });

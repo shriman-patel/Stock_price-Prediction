@@ -10,7 +10,7 @@ const Register = () => {
 
   const handleRegister = async () => {
     try {
-      await axios.post("http://127.0.0.1:8000/register", {
+      await axios.post("https://stock-price-prediction-46mf.onrender.com/register", {
         name,
         email,
         password,
