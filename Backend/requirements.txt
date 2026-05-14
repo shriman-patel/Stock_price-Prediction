@@ -4,7 +4,7 @@ numpy==1.26.4
 pandas
 yfinance
 scikit-learn
-tensorflow-cpu  <-- (Full TensorFlow ki jagah 'tensorflow-cpu' likhein, ye light hota hai)
+tensorflow-cpu  
 sqlalchemy
 passlib[bcrypt]
 python-jose[cryptography]
