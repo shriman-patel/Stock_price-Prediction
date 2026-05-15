@@ -20,6 +20,14 @@ from pydantic import BaseModel
 
 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 # ==============================
 # DATABASE SETUP
 # ==============================
@@ -76,13 +84,7 @@ def get_db():
     finally:
         db.close()
 
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
+
 # ==============================
 # DATABASE MODELS
 # ==============================
