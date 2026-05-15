@@ -81,7 +81,6 @@ function App() {
   const [suggestions, setSuggestions] = useState([]);
 
 const handleSearch = (value) => {
-  setTicker(value.toUpperCase());
 
   if (!value) {
     setSuggestions([]);
@@ -90,7 +89,7 @@ const handleSearch = (value) => {
 
   const input = value.trim().toLowerCase();
 
-  // 1. Smart filtering
+  // Search suggestions only
   const filtered = STOCKS.filter((stock) => {
     return (
       stock.symbol.toLowerCase().includes(input) ||
@@ -98,19 +97,10 @@ const handleSearch = (value) => {
     );
   });
 
-  // 2. Limit results (important for UI clean)
+  // Top 6 suggestions
   const topResults = filtered.slice(0, 6);
 
   setSuggestions(topResults);
-
-  // 3. Auto-correct only when confident
-  if (
-    input.length > 3 &&
-    filtered.length > 0 &&
-    filtered[0].symbol.toLowerCase().startsWith(input)
-  ) {
-    setTicker(filtered[0].symbol);
-  }
 };
 
 useEffect(() => {
