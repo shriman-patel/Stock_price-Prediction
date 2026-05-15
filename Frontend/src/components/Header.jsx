@@ -35,13 +35,21 @@ const navigate = useNavigate();
 onChange={(e) => onSearch(e.target.value)}
 onKeyDown={(e) => {
   if (e.key === "Enter") {
+
     if (suggestions.length > 0) {
       setTicker(suggestions[0].symbol);
-      setSuggestions([]);
+    } else {
+      setTicker(ticker.toUpperCase());
     }
+
+    setSuggestions([]);
+
     onPredict();
   }
-}}      placeholder="Search stocks (e.g., RELIANCE.NS, AAPL)"
+}}
+
+
+placeholder="Search stocks (e.g., RELIANCE.NS, AAPL)"
       className="w-full bg-[#1e293b] border border-gray-800 text-sm py-3 pl-12 pr-4 rounded-2xl outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all text-white"
    
    />
@@ -53,6 +61,8 @@ onKeyDown={(e) => {
         onClick={() => {
           setTicker(stock.symbol);
           setSuggestions([]);
+            onPredict();
+
         }}
         className="px-4 py-2 hover:bg-gray-800 cursor-pointer text-sm"
       >

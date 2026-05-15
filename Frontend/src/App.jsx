@@ -59,7 +59,8 @@ const STOCKS = [
 function App() {
 
   const [ticker, setTicker] = useState("AAPL");
-
+ 
+  const [searchInput, setSearchInput] = useState("");
   const [data, setData] = useState([]);
 
   const [prediction, setPrediction] = useState(null);
@@ -82,6 +83,8 @@ function App() {
 
 const handleSearch = (value) => {
 
+  setSearchInput(value);
+
   if (!value) {
     setSuggestions([]);
     return;
@@ -89,7 +92,6 @@ const handleSearch = (value) => {
 
   const input = value.trim().toLowerCase();
 
-  // Search suggestions only
   const filtered = STOCKS.filter((stock) => {
     return (
       stock.symbol.toLowerCase().includes(input) ||
@@ -97,10 +99,7 @@ const handleSearch = (value) => {
     );
   });
 
-  // Top 6 suggestions
-  const topResults = filtered.slice(0, 6);
-
-  setSuggestions(topResults);
+  setSuggestions(filtered.slice(0, 6));
 };
 
 useEffect(() => {
@@ -116,7 +115,7 @@ useEffect(() => {
 }, []); 
 
   const fetchPrediction = useCallback(() => {
-    if (!ticker) return;
+if (!ticker || ticker.length < 2) return;
     setLoading(true);
 const BASE_URL = "https://stock-price-prediction-46mf.onrender.com";
   const dataUrl = `${BASE_URL}/data/${ticker}/${range}`;
@@ -156,12 +155,15 @@ const BASE_URL = "https://stock-price-prediction-46mf.onrender.com";
         });
 }, [ticker, range]);
 
-  useEffect(() => {
+ useEffect(() => {
+  const delay = setTimeout(() => {
+    if (ticker && ticker.length >= 2) {
+      fetchPrediction();
+    }
+  }, 800); // debounce
 
-    fetchPrediction();
-
-  }, [fetchPrediction]);
-
+  return () => clearTimeout(delay);
+}, [ticker, range]);
   return (
 
     <BrowserRouter>
@@ -200,8 +202,7 @@ const BASE_URL = "https://stock-price-prediction-46mf.onrender.com";
 
                   <Header
 
-  ticker={ticker}
-
+ticker={searchInput}
   setTicker={setTicker}
 
   searchRef={searchRef}
@@ -209,15 +210,17 @@ const BASE_URL = "https://stock-price-prediction-46mf.onrender.com";
   onSearch={handleSearch}
   suggestions={suggestions}
   setSuggestions={setSuggestions}
-  onPredict={() => {
 
-    fetchPrediction();
 
-    setActiveTab(
-      "Live Market"
-    );
+ onPredict={() => {
+  if (!searchInput) return;
 
-  }}
+  const symbol = searchInput.toUpperCase();
+
+  setTicker(symbol);
+  setActiveTab("Live Market");
+}}
+
 
   loading={loading}
 
